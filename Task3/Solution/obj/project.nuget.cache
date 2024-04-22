@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Qqq6ZBVoERPpKvK/kqEFNpXh0EFMGmrcWMh5qAW3M6t2OHId+kUye72q70uWCprg/mgOK2Cac7fyAqpbDP4ZRQ==",
+  "success": true,
+  "projectFilePath": "\\\\Mac\\Home\\Desktop\\INTERNSHIP\\Tasks\\Task 3\\-1\\Task3.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\buzurgmexr\\.nuget\\packages\\consoletableext\\3.2.0\\consoletableext.3.2.0.nupkg.sha512",
+    "C:\\Users\\buzurgmexr\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\8.0.4\\microsoft.aspnetcore.authentication.facebook.8.0.4.nupkg.sha512",
+    "C:\\Users\\buzurgmexr\\.nuget\\packages\\zimlabs.tablecreator\\2.1.1\\zimlabs.tablecreator.2.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}
