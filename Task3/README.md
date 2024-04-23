@@ -133,6 +133,9 @@ And so on (you need to support any odd move number). Of course, for large values
 
 ## Checking computer choise
 - Follow this [link](https://www.devglan.com/online-tools/hmac-sha256-online)
-- Enter plain text to compute hash. This plain text is computer choise (e.g rock)
-- Enter the Secret Key
+- Enter plain text to compute hash. This plain text is computer choise (e.g. rock)
+- Enter the Secret Key (Original KEY)
 - Select Cryptographic Hash Function (SHA-256)
+- Output Text Format (Hex)
+- Press Compute hash button
+- Compare Hashed Output with Generated HMAC
