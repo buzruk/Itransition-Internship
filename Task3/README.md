@@ -131,3 +131,8 @@ And for 7:
 
 And so on (you need to support any odd move number). Of course, for large values it would be nice to implement some kind of pagination, but it's out of the scope of the basic task (you may consider it as an optional "for the highest grade" problem).
 
+## Checking computer choise
+- Follow this [link](https://www.devglan.com/online-tools/hmac-sha256-online)
+- Enter plain text to compute hash. This plain text is computer choise (e.g rock)
+- Enter the Secret Key
+- Select Cryptographic Hash Function (SHA-256)
