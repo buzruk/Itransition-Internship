@@ -1,0 +1,63 @@
+﻿@model RegistrationViewModel
+
+@{
+  ViewBag.Title = "Register";
+}
+
+@if (!String.IsNullOrEmpty(ViewBag.Error))
+{
+  @:<script>alert('User with the same name or email already exists');</script>
+}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <form asp-action="Register" method="post">
+        <div class="mb-2">
+          <label asp-for="Name" class="form-label"></label>
+          <input asp-for="Name" class="form-control" placeholder="Name">
+          <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+          <label asp-for="Email" class="form-label"></label>
+          <input asp-for="Email" class="form-control" placeholder="Email">
+          <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+          <label asp-for="Password" class="form-label"></label>
+          <input asp-for="Password" class="form-control" placeholder="Password">
+          <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-2">
+          <label asp-for="ConfirmPassword" class="form-label"></label>
+          <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password">
+          <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts {
+  <script>
+    function checkPass() {
+      let pass = document.querySelector('#inputPassword');
+      let passCheck = document.querySelector('#inputPassword2');
+      if (pass.value != passCheck.value) {
+        passCheck.classList.add('is-invalid');
+        passCheck.classList.remove('is-valid');
+        document.querySelector('button[type=submit]').setAttribute('disabled', 'disabled');
+      }
+      else {
+        passCheck.classList.add('is-valid');
+        passCheck.classList.remove('is-invalid');
+        document.querySelector('button[type=submit]').removeAttribute('disabled', 'disabled');
+      }
+    }
+  </script>
+}
