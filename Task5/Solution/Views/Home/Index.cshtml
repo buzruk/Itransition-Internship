@@ -1,0 +1,104 @@
+﻿@model IEnumerable<User>
+@{int counter = 1;}
+@{
+    ViewData["Title"] = "Home Page";
+    Layout="";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/data.js"></script>
+  <title>
+    FakeGeneration APP
+  </title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+<body class="g-sidenav-show  bg-gray-200">
+
+   <div class="container-fluid py-4 ">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative z-index-2">
+              <div class="border-radius-lg pt-4 pb-3">
+            
+                <h6 class="text-capitalize ps-3">Generation settings</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+          <div class="row">
+                <div class = "col-2 mx-4 pb-2">
+                  <p> Region section</p>
+                   <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="region" >
+                    <option value="en" selected>En</option>
+                    <option value="fr">Fr</option>
+                    <option value="it">It</option>
+                  </select>
+                </div>
+                <div class = "col-4">
+                  <p>Mistake section</p>
+                  <label for="customRange1" class="form-label">Example range</label>
+                  <input type="range" min=0 max=10 step=0.5 id="customRange1" value=0>
+                   <input type="number" id="textInput" class="form-control" min=0 max=1000 value=0>
+                </div>
+                 <div class = "col-4">
+                  <p>Seed section</p>
+                   <input type="number" id="seed" class="form-control" placeholder="Seed value" aria-label="Seed value" value=0 aria-describedby="button-addon">
+                  <button class="btn btn-outline-secondary" type="button" id="randomSeed">Random</button>
+                  <button class="btn btn-outline-secondary" type="button" id="getCSV">Download CSV</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+    
+   
+      <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header p-0 position-relative z-index-2">
+              <div class="border-radius-lg pt-4 pb-3">
+            
+                <h6 class="text-capitalize ps-3">Fake Generation Table</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0" id="userTable">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Index</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Name</th>
+                      <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Address</th>
+                      <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
