@@ -47,13 +47,14 @@ $(document).ready(function () {
       if (isLoading) {
         return;
       }
-      
+
       isLoading = true;
       seed = parseInt($('#seed').val());
       var region = $('#region').val();
       var errorCount = $('#textInput').val();
+      var rootUrl = window.location.origin
       axios
-        .get('/FakeData/GenerateData', {
+        .get(`${rootUrl}/FakeData/GenerateData`, {
           params: {
             region: region,
             errorCount: errorCount,
@@ -106,7 +107,8 @@ $(document).ready(function () {
     }
     function createCsv(){
       console.log('Call from createCSV function');
-      var url = '/FakeData/CreateCsv';
+      var rootUrl = window.location.origin
+      var url = `${rootUrl}/FakeData/CreateCsv`;
       fetch(url, {
         method: 'POST',
         headers:{'content-type':'application/json'},
