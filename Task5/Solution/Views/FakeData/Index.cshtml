@@ -80,11 +80,9 @@
     var region = $('#region').val();
     var errorCount = $('#errorCount').val();
     var seed = pageNumber + $('#seed').val();
-    var rootUrl = window.location.origin
-
 
     axios
-      .get(`${rootUrl}/FakeData/GenerateData`, {
+      .get(`/FakeData/GenerateData`, {
         params: {
           //region: region,
           errorCount: errorCount,

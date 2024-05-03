@@ -52,9 +52,8 @@ $(document).ready(function () {
       seed = parseInt($('#seed').val());
       var region = $('#region').val();
       var errorCount = $('#textInput').val();
-      var rootUrl = window.location.origin
       axios
-        .get(`${rootUrl}/FakeData/GenerateData`, {
+        .get(`/FakeData/GenerateData`, {
           params: {
             region: region,
             errorCount: errorCount,
@@ -107,8 +106,7 @@ $(document).ready(function () {
     }
     function createCsv(){
       console.log('Call from createCSV function');
-      var rootUrl = window.location.origin
-      var url = `${rootUrl}/FakeData/CreateCsv`;
+      var url = `$/FakeData/CreateCsv`;
       fetch(url, {
         method: 'POST',
         headers:{'content-type':'application/json'},
