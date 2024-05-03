@@ -1,0 +1,164 @@
+﻿@page "/"
+@using System.Globalization;
+@inject Microsoft.JSInterop.IJSRuntime JS
+@inject Manager manager
+@inject Config config
+@inject Export exporter
+
+<h3>Users</h3>
+
+
+
+<div class="d-flex justify-content-between">
+    <div>
+        <input id="rate" type="range" class="form-range" min="0" max="10" step="0.25" value="@TypoRate.ToString().Replace(',','.')" @oninput="@((ChangeEventArgs e) => OnSliderChange(e.Value.ToString()))">
+        <div class="input-group mb-2">
+            <span class="input-group-text">Errors</span>
+            <input id="rate-input" step="0.01" @bind="@TypoRate" @bind:event="onchange" type="number" style="width: 200px" class="form-control" min="0" max="1000" />
+        </div>
+    </div>
+    <div>
+        <select @bind="@Locale" class="form-select" style="width: 150px">
+            @foreach (var locale in config.SupportedLanguages())
+            {
+                <option value="@locale.Key">@locale.Value</option>
+            }
+        </select>
+    </div>
+    <div>
+        <div class="input-group mb-2">
+            <span class="input-group-text">Seed</span>
+            <input style="width: 200px" @bind="@Seed" @bind:event="oninput" class="form-control" id="seed" type="number" />
+        <button class="btn btn-primary" @onclick="RandomSeed">Random</button>
+        </div>
+    </div>
+    <div>
+        <div class="input-group mb-2">
+            <button class="btn btn-primary" @onclick="CreateDocument"> Export To CSV</button>
+        </div>
+    </div>
+</div>
+<InfiniteScroll ObserverTargetId="observerTarger" ObservableTargetReached="(e)=>LoadData()">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Full name</th>
+                <th>Address</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in users)
+            {
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Code</td>
+                    <td>@p.GetFullName()</td>
+                    <td>@p.GetFullAddress()</td>
+                    <td>@p.GetPhone()</td>
+                </tr>
+            }
+            <tr id="observerTarger"></tr>
+        </tbody>
+    </table>
+</InfiniteScroll>
+
+
+
+@code {
+    private async void CreateDocument()
+    {
+        MemoryStream csvStream = exporter.GetStream(users);
+        await JS.SaveAs("Data.csv", csvStream.ToArray());
+    }
+
+    public IEnumerable<User> users = Array.Empty<User>();
+    private int seed;
+    private int Seed
+    {
+        get { return seed; }
+        set
+        {
+            seed = value;
+            OnSeedChange(value);
+        }
+    }
+
+    private float typoRate;
+    private float TypoRate
+    {
+        get { return typoRate; }
+        set
+        {
+            typoRate = value;
+            OnTypoRateChange(value);
+        }
+    }
+
+    private string locale = "en_US";
+    private string Locale
+    {
+        get { return locale; }
+        set
+        {
+            locale = value;
+            OnLocaleChange(value);
+        }
+    }
+
+    private Random random = new Random((int)DateTime.Now.Ticks);
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Seed = config.DefaultSeed;
+        Locale = config.DefaultLocale;
+        TypoRate = config.DefaultTypoRate;
+        manager = new Manager(Seed, Locale, TypoRate);
+    }
+
+    private void OnSliderChange(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return;
+        if (float.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out float rate))
+        {
+            TypoRate = rate;
+        }
+    }
+
+    private void OnTypoRateChange(float rate)
+    {
+        if (rate < 0) rate = 0;
+        else if (rate > 1000) rate = 1000;
+        manager.UpdateTypoRate(rate);
+        users = manager.DirtyUsers();
+    }
+
+    private void OnLocaleChange(string locale)
+    {
+        if (string.IsNullOrWhiteSpace(locale)) return;
+        manager = new Manager(Seed, locale, TypoRate);
+        users = manager.DirtyUsers();
+    }
+
+    private void OnSeedChange(int seed)
+    {
+        manager = new Manager(Seed, Locale, TypoRate);
+        users = manager.DirtyUsers();
+
+    }
+
+    private void LoadData()
+    {
+        manager.AddUsers();
+        users = manager.DirtyUsers();
+    }
+
+    private void RandomSeed()
+    {
+        int seed = random.Next();
+        Seed = seed;
+    }
+}
