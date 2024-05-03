@@ -106,7 +106,7 @@ $(document).ready(function () {
     }
     function createCsv(){
       console.log('Call from createCSV function');
-      var url = `$/FakeData/CreateCsv`;
+      var url = `/FakeData/CreateCsv`;
       fetch(url, {
         method: 'POST',
         headers:{'content-type':'application/json'},
