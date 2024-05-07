@@ -10,7 +10,7 @@
                 [class.is-invalid]='loginForm.get("userName")!.errors && loginForm.get("userName")!.touched'
                 formControlName='userName' id="floatingInput" placeholder="Username">
             <label for="floatingInput">Username</label>
-            <div class="invalid-feedback" *ngIf="loginForm.get('userName')!.hasError('required')">Required UserName!</div>            
+            <div class="invalid-feedback" *ngIf="loginForm.get('userName')!.hasError('required')">Required UserName!</div>
         </div>
 
         <div class="form-floating">
@@ -26,9 +26,6 @@
         </div>
 
         <button [disabled]="!loginForm.valid" class="w-100 btn btn-lg btn-success" type="submit">Login</button>
-        <button class="w-100 btn btn-lg btn-primary" type="button" (click)="loginWithFacebook()">
-            <i class="fab fa-facebook"></i> Sign in with facebook
-        </button>
         <button class="w-100 btn btn-lg btn-warning" type="button" routerLink="/register">Register</button>
     </form>
 </div>

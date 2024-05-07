@@ -14,7 +14,7 @@
             </li>
             <li *ngIf="!(accountService.currentUser$ | async)">
                 <a class="nav-link px-2 text-primary" routerLink="/login" routerLinkActive='active'>Login</a>
-            </li>            
+            </li>
         </ul>
 
         <div class="btn-group" dropdown *ngIf="(accountService.currentUser$ | async) as user">
@@ -23,8 +23,8 @@
                 <img class="rounded-circle img-persion" src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.displayName}}"> <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                <li role="menuitem"><a class="dropdown-item" routerLink="/avarta-managed">Avarta</a></li>
-                <li role="menuitem"><a class="dropdown-item" routerLink="/edit-information" (click)="infor()">Infor test</a>
+                <li role="menuitem"><a class="dropdown-item" routerLink="/avarta-managed">Avatar</a></li>
+                <li role="menuitem"><a class="dropdown-item" routerLink="/edit-information" (click)="infor()">Edit information</a>
                 </li>
                 <li class="divider dropdown-divider"></li>
                 <li role="menuitem"><a class="dropdown-item" (click)="logout()">Sign out</a>
